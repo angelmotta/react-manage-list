@@ -42,6 +42,7 @@ function App() {
         const copylistItems = [...items]; // make a copy
         copylistItems.push(newElement); // mutate the object
         setItems(copylistItems); // update the state with the new object
+        setNameItem("");
     };
 
     const handleOnChangeNameItem = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +52,8 @@ function App() {
     const handleOnClickDelete = (idElement: string) => {
         console.log(`Handle onClick Delete`);
         console.log(`Delete element with id: ` + idElement);
+        const newListItems = items.filter((item) => item.id !== idElement);
+        setItems(newListItems);
     };
 
     return (
