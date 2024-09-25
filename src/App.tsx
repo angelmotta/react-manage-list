@@ -1,25 +1,31 @@
 import { useState } from "react";
 import "./App.css";
 
-const LIST_ITEMS = [
+interface Item {
+    id: string;
+    timestamp: number;
+    text: string;
+}
+
+const LIST_ITEMS: Item[] = [
     {
         id: crypto.randomUUID(),
-        timestamp: new Date(),
+        timestamp: Date.now(),
         text: "Java",
     },
     {
         id: crypto.randomUUID(),
-        timestamp: new Date(),
+        timestamp: Date.now(),
         text: "Node.js",
     },
     {
         id: crypto.randomUUID(),
-        timestamp: new Date(),
+        timestamp: Date.now(),
         text: "SQL",
     },
     {
         id: crypto.randomUUID(),
-        timestamp: new Date(),
+        timestamp: Date.now(),
         text: "React",
     },
 ];
@@ -34,7 +40,7 @@ function App() {
         // // Create object using state variable
         const newElement = {
             id: crypto.randomUUID(),
-            timestamp: new Date(),
+            timestamp: Date.now(),
             text: nameItem,
         };
         console.log(newElement);
@@ -71,18 +77,22 @@ function App() {
                     />
                     <button>Agregar</button>
                 </form>
-                <ul>
-                    {items.map((item) => (
-                        <li key={item.id}>
-                            {item.text}
-                            <button
-                                onClick={() => handleOnClickDelete(item.id)}
-                            >
-                                Eliminar
-                            </button>
-                        </li>
-                    ))}
-                </ul>
+                {items.length === 0 ? (
+                    <p>Lista sin elementos</p>
+                ) : (
+                    <ul>
+                        {items.map((item) => (
+                            <li key={item.id}>
+                                {item.text}
+                                <button
+                                    onClick={() => handleOnClickDelete(item.id)}
+                                >
+                                    Eliminar
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                )}
             </main>
         </>
     );
